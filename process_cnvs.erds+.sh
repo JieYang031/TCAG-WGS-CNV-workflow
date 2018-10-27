@@ -37,6 +37,16 @@ alt_erds="alt.erds.txt"
 alt_cnvn="alt.cnvn.txt"
 cnv_tag=$cnv_dir/ALL_CNV
 
+‘’‘
+create folders as below:
+--cnv_dir
+  --erds_dir
+    --original
+    --formated
+      --temp
+    --merged
+‘’‘
+
 echo "Set-up.."
 if  [[ -d $erds_dir/original ]] ; then
     echo "Found erds/original, creating erds/formatted"
@@ -49,6 +59,16 @@ else
     echo "erds/original missing exit.."
     exit
 fi
+
+'''
+--cnv_dir
+  --cnvn_dir
+    --original
+    --formated_filtered
+      --formated
+      --filtered
+    --merged
+'''
 
 if  [[ -d $cnvn_dir/original ]] ; then
     echo "Found cnvn/original, creating cnvn/formatted_filtered"
@@ -66,6 +86,11 @@ else
     echo "cnvn/original missing exit.."
     exit
 fi
+
+'''
+--cnv_dir
+  --erds+
+'''
 
 if  [[ -d $merge_dir ]] ; then
     echo "Found erds+, deleting files"
