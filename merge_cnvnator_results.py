@@ -14,6 +14,7 @@ RATIO_CUTOFF = 10
 
 header = ["#sample","chrm","start","end","cnv","size","normalized_rd","e-val2","q0"]
 
+#read the arguments in
 parser = OptionParser ( )
 parser.add_option ( '-i', dest='input_dir', help='Directory with ERDS CNV calls')
 parser.add_option ( '-a', dest='alt_file', default=None, help='alt ids = two columns')
@@ -29,6 +30,7 @@ gap_file = options.gap_file
 debug=open("cnvn.merge.log",'w')
 alt = 0
 #read options
+#check if all arguments avail
 if input_dir == None:
   print "Please specify the path to ERDS CNV call directory ..."
   sys.exit(1)  
@@ -166,7 +168,9 @@ for line in alt:
 		print "Duplicate entry for sample ", words[0]
 		sys.exit(0)
 alt.close()
-
+#words[0] = TCGA-05-5429-01A-01D-1625-08.calls.filtered.txt
+#words[1] = TCGA-05-5429-01A-01D-1625-08
+#the delimiter in the alt.cnvn.txt needs to be "\t" because they use it to split lines
 ###################################
 #read gaps
 gap_pos =  open(gap_file)
@@ -188,6 +192,8 @@ flag = 0
 header_index = {}
 h_flag = 0
 complete = 1
+#samples = TCGA-05-5429-01A-01D-1625-08.calls.txt
+#sample = samples because only one sample involved
 for sample in samples:	
   sample_name = sample.replace(".CNVnator.wg.bin500.calls.filtered.txt","")
 
@@ -196,11 +202,12 @@ for sample in samples:
     sample_name=alt_name[sample_name]
 
   s_file = input_dir+"/*"+sample
+#s_file = /scratch/bcb/jyang32/MethyCNV2/test/TCGA-05-5429-01A-01D/temp/mycnvs//cnvn/formatted_filtered/formatted//*TCGA-05-5429-01A-01D-1625-08.calls.txt
   t_file_name = sample_name + ".temp"
-  
+#t_file_name = TCGA-05-5429-01A-01D-1625-08.calls.txt.temp  
   #sort call file based on the chr, start and end position, remove comments also
   command = "sort -k5,5 -k2,2 -k3,3n -k4,4n " + s_file + " | grep -v \"^>\" > " + t_file_name
-  os.system(command)
+  os.system(command) #output is 0
   
   t_file = open(t_file_name)
   cnvs = {}
