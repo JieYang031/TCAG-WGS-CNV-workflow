@@ -251,9 +251,10 @@ for sample in samples:
 	
   merged = {}
   calls_to_cluster = []
-  
+ #cnvs.keys() = ['20', '21', '22', '1', '3', '2', '5', '4', '7', '6', '9', '8', '11', '10', '13', '12', '15', '14', '17', '16', '19', '18']
   for c in cnvs.keys():
     for d in cnvs[c].keys():
+	#d = ['DUP', 'DEL']
       temp_calls_to_cluster = []
       temp = []
       interval_size = 0
@@ -274,7 +275,8 @@ for sample in samples:
         int_size = int_end - int_start
         
         #GAP
-        gap_ovlp = functions.find_overlap(gaps[c], int_start, int_end)
+	gap_ovlp = functions.find_overlap(gaps["chr"+c], int_start, int_end)
+        #gap_ovlp = functions.find_overlap(gaps[c], int_start, int_end)
         #OPPOSITE CNV
         if cnvs.has_key(c):
           if cnvs[c].has_key(other):
