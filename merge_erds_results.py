@@ -269,7 +269,8 @@ for sample in samples:
         
         if int_size > 0:  
           #GAP
-          gap_ovlp = functions.find_overlap(gaps[c], int_start, int_end)
+	  gap_ovlp = functions.find_overlap(gaps["chr"+c], int_start, int_end)
+          #gap_ovlp = functions.find_overlap(gaps[c], int_start, int_end)
           #OPPOSITE CNV
           if cnvs.has_key(c):
             if cnvs[c].has_key(other):
