@@ -24,7 +24,7 @@ in_file = sys.argv[1]
 out_file = sys.argv[2]
 
 if not os.path.isfile(in_file):
-        print "erds output not found ..."
+        print "CNVnator output not found ..."
         sys.exit(1)
 if os.path.isfile(out_file):
         print "Delete file", out_file, "and rerun"
